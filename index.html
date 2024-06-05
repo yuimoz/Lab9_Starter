@@ -194,7 +194,7 @@
          console.error(`{error.name}: ${error.message}`);
       }
     }
-    
+
     // Step 5
     window.onerror = function (message, source, lineno, colno, error) {
       console.error(`Caught error: ${message} at ${source}:${lineno}:
@@ -202,7 +202,7 @@
       return true; 
     }
     function globalError() {
-      nonexistentFunction(); 
+      boomDoom();
     }
   </script>
 
