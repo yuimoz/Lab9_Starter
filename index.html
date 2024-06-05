@@ -69,21 +69,20 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button onclick="consoleLog()">Console Log</button>
+      <button onclick="consoleError()">Console Error</button>
+      <button onclick="consoleCount()">Console Count</button>
+      <button onclick="consoleWarn()">Console Warn</button>
+      <button onclick="consoleAssert()">Console Assert</button>
+      <button onclick="consoleClear()">Console Clear</button>
+      <button onclick="consoleDir()">Console Dir</button>
+      <button onclick="consoleDirxml()">Console dirxml</button>
+      <button onclick="consoleGroupStart()">Console Group Start</button>
+      <button onclick="consoleGroupEnd()">Group End</button>
+      <button onclick="consoleStartTimer()">Start Timer</button>
+      <button onclick="consoleEndTimer()">End Timer</button>
+      <button onclick="consoleTrace()">Console Trace</button>
+      <button onclick="globalError()">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -102,7 +101,118 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
-  </script>
-</body>
+    // Step 2
+    function consoleLog() {
+      console.log('console log demo');
+    }
 
+    function consoleError() {
+      console.log('error msg');
+    }
+
+    function consoleCount() {
+      console.count();
+      console.count();
+    }
+
+    function consoleWarn() {
+      console.warn('console warn demo');
+    }
+
+    function consoleAssert() { 
+      console.assert(false, 'this is an assert msg');
+    }
+
+    function consoleClear() {
+      console.clear();
+    }
+
+    function consoleDir() {
+      console.dir(document.body);
+    }
+
+    function consoleDirxml() {
+      console.dirxml(document);
+    }
+
+    function consoleGroupStart() {
+      console.group('group1');
+
+    }
+
+    function consoleGroupEnd() {
+      console.groupEnd(); 
+    }
+
+    function consoleTable() {
+      console.table([{
+         name: 'Lu', age: 22}, {name: 'Iris', age: 20}
+      ]);
+    }
+
+    function consoleStartTimer() {
+      console.time();
+    }
+
+    function consoleEndTimer() {
+      console.timeEnd();
+    }
+
+    function consoleTrace() {
+      console.trace('trace msg');
+    }
+    
+    // Step 3
+    try {
+      if (!firstNum || !secondNum) {
+         throw new Error('both numbers are required');
+      }
+      if (isNan(firstNum) || isNan(secondNum)) {
+         throw new Error('both must be valid numbers');
+      }
+      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+      } catch (error) {
+         console.error(error.message);
+         output.innerHTML = 'error';
+      } finally {
+         console.log('attempt');
+      }
+
+    // Step 4
+    class CustomError extends Error {
+      constructor(message) {
+         super(message);
+         this.name = 'CustomError';
+      }
+    }
+
+    function triggerCustomError() {
+      try {
+         throw new CustomError('custom error msg');
+      } catch (error) {
+         console.error(`{error.name}: ${error.message}`);
+      }
+    }
+    
+    // Step 5
+    window.onerror = function (message, source, lineno, colno, error) {
+      console.error(`Caught error: ${message} at ${source}:${lineno}:
+      ${colno}`);
+      return true; 
+    }
+    function globalError() {
+      nonexistentFunction(); 
+    }
+  </script>
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+  window.TrackJS && TrackJS.install({ 
+    token: "34008fcfd80a4ccdab5a1d151bd756cf"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+  </script>
+
+</body>
 </html>
